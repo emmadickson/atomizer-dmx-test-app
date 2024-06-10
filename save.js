@@ -27,7 +27,7 @@ function updateConfig(valuesArray) {
                   config[key] = valuesArray[key];
               }
           }
-        
+
 
         // Write the updated configuration back to the JSON file
         fs.writeFileSync('sliderValues.json', JSON.stringify(config, null, 2));

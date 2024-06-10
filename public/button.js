@@ -2,26 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-  document.getElementById('entec').addEventListener('keydown', function(event) {
-           if (event.key === 'Enter') {
-               const universeName = event.target.value;
 
-               fetch('/set-universe', {
-                   method: 'POST',
-                   headers: {
-                       'Content-Type': 'application/json'
-                   },
-                   body: JSON.stringify({ universeName: universeName })
-               })
-               .then(response => response.text())
-               .then(data => {
-                   console.log(data); // Log the response from the server
-               })
-               .catch(error => {
-                   console.error('Error:', error);
-               });
-           }
-       });
     // Find all buttons within the control-panel
     const buttons = document.querySelectorAll('.control-panel .control button');
     buttons.forEach(button => {

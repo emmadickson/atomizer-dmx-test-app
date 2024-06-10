@@ -21,15 +21,8 @@ app.listen(port, () => {
 
 const dmx = new DMX();
 let universeName = '';
-let universe;
-function initializeUniverse(universeName) {
-    try {
-        universe = dmx.addUniverse(universeName, 'enttec-usb-dmx-pro', universeName);
-        console.log(`Universe ${universeName} initialized successfully.`);
-    } catch (err) {
-        console.error(`Error initializing DMX universe ${universeName}:`, err);
-    }
-}
+const universe = dmx.addUniverse(universeName, 'enttec-usb-dmx-pro', 'COM7');
+
 
 const dmxValues = [ 25, 50, 75, 100, 125, 150, 175, 200, 225, 255];
 let currentIndex = 0;
@@ -130,11 +123,4 @@ app.post('/update-config', (req, res) => {
     const updatedValues = req.body; // Assuming the updated values are sent as an object in the request body
     updateConfig(updatedValues); // Call the updateConfig function with the received values
     res.status(200).send('Config updated successfully.');
-});
-
-app.post('/set-universe', (req, res) => {
-    const newUniverseName = req.body.universeName;
-    console.log(`Setting universe name to: ${newUniverseName}`);
-    initializeUniverse(newUniverseName); // Initialize the universe with the new name
-    res.status(200).send(`Universe name set to ${newUniverseName}`);
 });

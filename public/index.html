@@ -14,7 +14,6 @@
         <button id="save">Save</button>
         <button id="run">Run</button>
         <button id="fade">Fade Test</button>
-        <input type="string" value="" id="entec">Entec ID</input>
 
     </div>
 <br><br><br>
@@ -69,19 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }
                 }
-              // Update the entec input field
-               const entecInput = document.getElementById('entec');
-               if (config.entecId && entecInput) {
-                   entecInput.value = config.entecId;
-               }
-               console.log(config)
-               fetch('/set-universe', {
-                   method: 'POST',
-                   headers: {
-                       'Content-Type': 'application/json'
-                   },
-                   body: JSON.stringify({ universeName: entecInput.value })
-               })
+
             })
             .catch(error => {
                 console.error('Error fetching configuration:', error);
