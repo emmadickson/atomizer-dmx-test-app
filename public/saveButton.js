@@ -11,10 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             sliderValues[slider.id] = slider.value;
         });
 
-        const entecInput = document.getElementById('entec')
 
-        const entecId = entecInput.value;
-        console.log("Entec ID:", entecId);
 
         // Convert sliderValues to a JSON string
         let content = JSON.stringify(sliderValues);
@@ -23,8 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Parse the JSON string back to an object
         let contentObj = JSON.parse(content);
 
-        // Add entecId to the object
-        contentObj['entecId'] = entecId;
+    
 
         // Convert the object back to a JSON string
         content = JSON.stringify(contentObj);
