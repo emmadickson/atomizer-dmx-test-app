@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Control Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <script  src="./slider.js"></script>
+    <script  src="./button.js"></script>
+    <script  src="./saveButton.js"></script>
+</head>
+<body>
+<div class="control-panel">
+    <div class="control">
+        <button id="save">Save</button>
+        <button id="run">Run</button>
+        <button id="fade">Fade Test</button>
+        <input type="string" value="" id="entec">Entec ID</input>
+
+    </div>
+<br><br><br>
+
+<div class="control">
+     <span class="label">DMX Value</span>
+     <div class="slider-container">
+         <span class="min-value">0</span>
+         <input type="range" min="0" max="255" value="255" class="slider" id="dmx-plus-slider">
+         <span class="max-value">255</span>
+         <input type="number" min="0" max="255" value="255" class="slider-value" id="dmx-plus-slider-value">
+     </div>
+ </div>
+
+
+    <div class="control">
+        <span class="label">On For (in Sec)</span>
+        <div class="slider-container">
+            <span class="min-value">2</span>
+            <input type="range" min="2" max="10" value="0" class="slider" id="on-plus-slider">
+            <span class="max-value">10</span>
+            <input type="number" min="0" max="10" value="0" class="slider-value" id="on-plus-slider-value">
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to fetch slider values from the server and update sliders
+    const fetchSliderValuesAndUpdateSliders = () => {
+        fetch('/get-config')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch configuration.');
+                }
+                return response.json();
+            })
+            .then(config => {
+                // Loop through the received config object and update slider values
+                for (const sliderId in config) {
+                    if (config.hasOwnProperty(sliderId)) {
+                        const slider = document.getElementById(sliderId);
+                        const sliderValueInput = document.getElementById(sliderId + '-value');
+                        if (slider) {
+                            slider.value = config[sliderId];
+                            if (sliderValueInput) {
+                                sliderValueInput.value = config[sliderId]; // Update input value
+                            }
+                        }
+                    }
+                }
+              // Update the entec input field
+               const entecInput = document.getElementById('entec');
+               if (config.entecId && entecInput) {
+                   entecInput.value = config.entecId;
+               }
+               console.log(config)
+               fetch('/set-universe', {
+                   method: 'POST',
+                   headers: {
+                       'Content-Type': 'application/json'
+                   },
+                   body: JSON.stringify({ universeName: entecInput.value })
+               })
+            })
+            .catch(error => {
+                console.error('Error fetching configuration:', error);
+            });
+    };
+
+    // Call the function to fetch and update slider values when the page is loaded
+    fetchSliderValuesAndUpdateSliders();
+});
+
+</script>
+</html>

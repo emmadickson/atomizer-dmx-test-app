@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    width: 65%;
+}
+
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.control {
+    display: flex;
+    align-items: center;
+}
+
+.label {
+    flex-basis: 40%; /* Adjust this value as needed to fit your layout */
+}
+
+button {
+    width: 50px; /* Makes button square */
+    height: 40px;
+    cursor: pointer;
+    margin-left: 10px; /* Adds space between the label and button */
+    flex-shrink: 0; /* Prevents the button from shrinking */
+}
+.slider-container {
+    position: relative;
+    flex-grow: 1;
+    margin-left:20px;
+    display: flex;
+    align-items: center;
+}
+
+.min-value, .max-value {
+    font-size: 0.8em;
+}
+
+.current-value {
+    position: absolute;
+    font-size: 0.8em;
+    margin-left: -20px; /* Adjust based on slider thumb position */
+    top: -20px; /* Position above the slider */
+}
+
+.slider {
+    width: 100%; /* Ensure the slider fills the container */
+    cursor: pointer;
+}
+.slider-value {
+    margin-left: 50px; /* Set a fixed width for the input */
+}
+.checkbox-row {
+    display: flex;
+    justify-content: center; /* Aligns items to the center, making them closer together */
+    margin-bottom: 20px; /* Adds some space between this row and the next */
+    gap: 10px; /* Adjust this value to control spacing between checkboxes */
+}
+#entec{
+  margin-left: 10px;
+  width: 90px;
+
+}
+.checkbox-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.checkbox-control input[type="checkbox"] {
+  width: 80px;
+    margin: 5px 0; /* Space between the top label and checkbox, and checkbox and bottom label */
+}
+
+/* Style for the Save button */
+#save-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center; /* Center the text */
+}
+
+#save-button:hover {
+    background-color: #0056b3;
+}
